@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="src/css/main.css">
+    <title>Kacper Jędrzejewski - Recruitment task</title>
+</head>
+<body onload="restore()">
+   
+    <div class="container">
+        <div id="popup" class="popup popup-dark">
+
+            <div class="popup-content">
+                <span class="popup-close">&times;</span>
+                <div class="popup-title t1 color-dark">
+                    Alert!
+                </div>
+                <div class="popup-text-body main-text">You have clicked <b><span id="count"></span> times</b> to related button</div>
+                <div onClick="reset_button()" id="reset" class="btn btn-reset">Reset</div>
+            </div>
+    
+        </div>
+        <div class="col-6">
+            <div class="img"></div>
+        </div>
+        <div class="col-6">
+            <div class="title t1 color-dark">
+                Lorem Ipsum
+            </div>
+            <div class="text-body main-text">
+                Infinitely scalable, feature-rich and cloud-native data management and protection for modern and legacy infrastructures and SaaS platforms, managed via a single app with no hardware required.
+            </div> 
+            <div class="btn btn-primary" id="popup-open-btn">Button</div>
+        </div>
+    
+    
+    </div>
+    
+    <script type="text/javascript">
+        let popup = document.getElementById("popup");
+  
+        let btn = document.getElementById("popup-open-btn");
+
+        let span = document.getElementsByClassName("popup-close")[0];
+
+        let count = 0;
+       
+       function restore() {
+        let clickcount = localStorage.getItem(count);
+       }
+
+        btn.onclick = function() {
+          
+          popup.style.display = "block";
+          if (typeof(Storage) !== "undefined") {
+            if (localStorage.clickcount) {
+            localStorage.clickcount = Number(localStorage.clickcount)+1;
+            } else {
+            localStorage.clickcount = 1;
+            }
+          }
+          
+          document.getElementById("count").innerHTML = localStorage.clickcount;
+          if (localStorage.clickcount >= 5) {
+            reset.style.display = "block";
+          }
+        }
+  
+        span.onclick = function() {
+          popup.style.display = "none";
+        }
+  
+        window.onclick = function(event) {
+          if (event.target == popup) {
+            popup.style.display = "none";
+          }
+        }
+
+        function reset_button() {
+            popup.style.display = "none";
+            reset.style.display = "none";
+            localStorage.clickcount = 0;
+            
+        }
+</script>
+        
+</body>
